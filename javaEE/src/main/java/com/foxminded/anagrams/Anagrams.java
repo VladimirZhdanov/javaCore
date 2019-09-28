@@ -1,4 +1,4 @@
-package com.foxminded;
+package com.foxminded.anagrams;
 
 import java.util.StringJoiner;
 
