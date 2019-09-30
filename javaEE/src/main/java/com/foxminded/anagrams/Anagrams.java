@@ -19,10 +19,12 @@ public class Anagrams {
      * Reverse each alphabetic symbol in given array of char, non-alphabetic will be skipped.
      *
      * @param word - a word with letters that need to be reversed.
+     * @return reversed word.
      */
-    private void reverseWord(char[] word) {
+    private String reverseWord(char[] word) {
         int rightPointer = word.length - 1;
         int leftPointer = 0;
+        String result = String.copyValueOf(word);
 
         while (leftPointer < rightPointer) {
             if (!isAlphabetic(word[leftPointer])) {
@@ -31,10 +33,12 @@ public class Anagrams {
                 rightPointer--;
             } else {
                 swapLetters(rightPointer, leftPointer, word);
+                result = String.copyValueOf(word);
                 leftPointer++;
                 rightPointer--;
             }
         }
+        return result;
     }
 
     /**
@@ -55,9 +59,12 @@ public class Anagrams {
      * non-alphabetic will be skipped.
      *
      * @param string string that you want to reverse
-     * @return revered string
+     * @return reversed string
+     * @throws IllegalArgumentException throws IAE when put a null.
      */
     public String reverseString(String string) {
+        String temp;
+
         if (string == null) {
             throw new IllegalArgumentException("Something went wrong...");
         }
@@ -65,8 +72,8 @@ public class Anagrams {
         String[] stringArray = string.split(WHITESPACE);
         for (int i = 0; i < stringArray.length; i++) {
             char[] word = stringArray[i].toCharArray();
-            reverseWord(word);
-            joiner.add(String.copyValueOf(word));
+            temp = reverseWord(word);
+            joiner.add(temp);
         }
         return joiner.toString();
     }

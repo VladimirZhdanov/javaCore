@@ -11,6 +11,12 @@ import org.junit.Test;
  */
 public class AnagramsTest {
     private Anagrams anagrams = new Anagrams();
+    private static final String ONLY_LETTERS = "abcd efgh";
+    private static final String ONLY_NUMBERS = "32432 324234";
+    private static final String REVERSED_LETTERS = "dcba hgfe";
+    private static final String LETTERS_AND_NUMBERS = " c1onstHomeSPB@gmail.com";
+    private static final String REVERSED_LETTERS_AND_NUMBERS = " m1ocliamgBPSe@moHts.noc";
+    private static final String WHITESPACE = " ";
 
     @Test(expected = IllegalArgumentException.class)
     public void shouldThrowIllegalArgumentExceptionWhenGiveNull() {
@@ -20,57 +26,25 @@ public class AnagramsTest {
 
     @Test
     public void shouldReverseStringWhenApplyTheMethod1() {
-        String input = " a1bcd efg!h";
-        String expected = " d1cba hgf!e";
-        String result = anagrams.reverseString(input);
-        assertThat(result, is(expected));
+        String result = anagrams.reverseString(ONLY_NUMBERS);
+        assertThat(result, is(ONLY_NUMBERS));
     }
 
     @Test
     public void shouldReverseStringWhenApplyTheMethod2() {
-        String input = "abcd efgh";
-        String expected = "dcba hgfe";
-        String result = anagrams.reverseString(input);
-        assertThat(result, is(expected));
+        String result = anagrams.reverseString(ONLY_LETTERS);
+        assertThat(result, is(REVERSED_LETTERS));
     }
 
     @Test
     public void shouldReverseStringWhenApplyTheMethod3() {
-        String input = "hool1";
-        String expected = "looh1";
-        String result = anagrams.reverseString(input);
-        assertThat(result, is(expected));
+        String result = anagrams.reverseString(LETTERS_AND_NUMBERS);
+        assertThat(result, is(REVERSED_LETTERS_AND_NUMBERS));
     }
 
     @Test
     public void shouldReverseStringWhenApplyTheMethod4() {
-        String input = "2452";
-        String expected = "2452";
-        String result = anagrams.reverseString(input);
-        assertThat(result, is(expected));
-    }
-
-    @Test
-    public void shouldReverseStringWhenApplyTheMethod5() {
-        String input = "abcd 2452";
-        String expected = "dcba 2452";
-        String result = anagrams.reverseString(input);
-        assertThat(result, is(expected));
-    }
-
-    @Test
-    public void shouldReverseStringWhenApplyTheMethod6() {
-        String input = "constHomeSPB@gmail.com";
-        String expected = "mocliamgBPSe@moHts.noc";
-        String result = anagrams.reverseString(input);
-        assertThat(result, is(expected));
-    }
-
-    @Test
-    public void shouldReverseStringWhenApplyTheMethod7() {
-        String input = " ";
-        String expected = "";
-        String result = anagrams.reverseString(input);
-        assertThat(result, is(expected));
+        String result = anagrams.reverseString(WHITESPACE);
+        assertThat(result, is(""));
     }
 }
