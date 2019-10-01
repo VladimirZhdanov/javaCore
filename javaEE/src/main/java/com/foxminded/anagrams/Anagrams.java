@@ -63,8 +63,6 @@ public class Anagrams {
      * @throws IllegalArgumentException throws IAE when put a null.
      */
     public String reverseString(String string) {
-        String temp;
-
         if (string == null) {
             throw new IllegalArgumentException("Something went wrong...");
         }
@@ -72,8 +70,7 @@ public class Anagrams {
         String[] stringArray = string.split(WHITESPACE);
         for (int i = 0; i < stringArray.length; i++) {
             char[] word = stringArray[i].toCharArray();
-            temp = reverseWord(word);
-            joiner.add(temp);
+            joiner.add(reverseWord(word));
         }
         return joiner.toString();
     }
