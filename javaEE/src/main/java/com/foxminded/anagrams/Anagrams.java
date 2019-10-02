@@ -3,6 +3,7 @@ package com.foxminded.anagrams;
 import java.util.StringJoiner;
 
 import static java.lang.Character.isAlphabetic;
+import static java.lang.String.copyValueOf;
 
 /**
  * Anagrams
@@ -24,7 +25,7 @@ public class Anagrams {
     private String reverseWord(char[] word) {
         int rightPointer = word.length - 1;
         int leftPointer = 0;
-        String result = String.copyValueOf(word);
+        String result = copyValueOf(word);
 
         while (leftPointer < rightPointer) {
             if (!isAlphabetic(word[leftPointer])) {
@@ -33,7 +34,7 @@ public class Anagrams {
                 rightPointer--;
             } else {
                 swapLetters(rightPointer, leftPointer, word);
-                result = String.copyValueOf(word);
+                result = copyValueOf(word);
                 leftPointer++;
                 rightPointer--;
             }

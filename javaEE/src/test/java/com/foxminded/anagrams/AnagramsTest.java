@@ -23,7 +23,6 @@ public class AnagramsTest {
         anagrams.reverseString(null);
     }
 
-
     @Test
     public void shouldReverseStringWhenApplyTheMethod1() {
         String result = anagrams.reverseString(ONLY_NUMBERS);
