@@ -25,61 +25,61 @@ public class AnagramsTest {
     public static final String WHITESPACE = " ";
 
     @BeforeEach
-    void initEach() {
+    public void initEach() {
         anagrams = new Anagrams();
     }
 
     @Test
-    void shouldThrowIllegalArgumentExceptionWhenGiveNull() {
+    public void shouldThrowIllegalArgumentExceptionWhenGiveNull() {
         Exception exception = assertThrows(IllegalArgumentException.class, () ->
                 anagrams.reverseString(null));
         assertEquals("Something went wrong...", exception.getMessage());
     }
 
     @Test
-    void shouldDoNothingWhenApplyNumbersToTheMethod() {
+    public void shouldDoNothingWhenApplyNumbersToTheMethod() {
         String actual = anagrams.reverseString(ONLY_NUMBERS);
         assertEquals(ONLY_NUMBERS, actual,
                 "Reverse method should return the non-reversed numbers");
     }
 
     @Test
-    void shouldDoNothingWhenApplySymbolsToTheMethod() {
+    public void shouldDoNothingWhenApplySymbolsToTheMethod() {
         String actual = anagrams.reverseString(ONLY_SYMBOLS);
         assertEquals(ONLY_SYMBOLS, actual,
                 "Reverse method should return the non-reversed symbols");
     }
 
     @Test
-    void shouldReverseStringWhenApplyLettersToTheMethod() {
+    public void shouldReverseStringWhenApplyLettersToTheMethod() {
         String actual = anagrams.reverseString(ONLY_LETTERS);
         assertEquals(REVERSED_LETTERS, actual,
                 "Reverse method should return the reversed letters");
     }
 
     @Test
-    void shouldReverseLettersWhenApplyStringToTheMethod1() {
+    public void shouldReverseLettersWhenApplyStringToTheMethod1() {
         String actual = anagrams.reverseString(LETTERS_AND_NUMBERS);
         assertEquals(REVERSED_LETTERS_AND_NUMBERS, actual,
                 "Reverse method should return the reversed letters only!");
     }
 
     @Test
-    void shouldReverseLettersWhenApplyStringToTheMethod2() {
+    public void shouldReverseLettersWhenApplyStringToTheMethod2() {
         String actual = anagrams.reverseString(LETTERS_AND_SYMBOLS);
         assertEquals(REVERSED_LETTERS_AND_SYMBOLS, actual,
                 "Reverse method should return the reversed letters only!");
     }
 
     @Test
-    void shouldReverseLettersWhenApplyStringToTheMethod3() {
+    public void shouldReverseLettersWhenApplyStringToTheMethod3() {
         String actual = anagrams.reverseString(LETTERS_NUMBERS_SYMBOLS);
         assertEquals(REVERSED_LETTERS_NUMBERS_SYMBOLS, actual,
                 "Reverse method should return the reversed letters only!");
     }
 
     @Test
-    void shouldDeleteWhiteSpaceWhenApplyWhiteSpaceToTheMethod() {
+    public void shouldDeleteWhiteSpaceWhenApplyWhiteSpaceToTheMethod() {
         String actual = anagrams.reverseString(WHITESPACE);
         assertEquals("", actual,
                 "Reverse method should return empty string!");
