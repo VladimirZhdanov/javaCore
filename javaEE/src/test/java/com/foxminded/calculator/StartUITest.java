@@ -7,7 +7,6 @@ import java.util.function.Consumer;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * StartUITest
@@ -17,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
  */
 class StartUITest {
     private final ByteArrayOutputStream out = new ByteArrayOutputStream();
-    private final Consumer<String> output = new Consumer<String>() {
+    private final Consumer<String> output = new Consumer<>() {
         private final PrintStream newOut = new PrintStream(out);
 
         @Override
@@ -33,10 +32,12 @@ class StartUITest {
     private Calculator calculator = new Calculator();
 
     @Test
-    public void run() {
+    public void shouldReturnResultOfCalculationsWhenUserDoesCalculations() {
         Input input = new SimulateInput(Arrays.asList("1/2", "/2", "/10", "exit"));
         new StartUI(input, calculator, output).run();
-        assertEquals(0.025, calculator.getResult(),
-                "TODO");
+        double expected = 0.025;
+        double actual = calculator.getResult();
+        assertEquals(expected, actual,
+                "Should return result of calculations when User Does calculations...");
     }
 }

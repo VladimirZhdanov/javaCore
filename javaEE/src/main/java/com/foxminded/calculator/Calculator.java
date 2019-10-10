@@ -8,38 +8,63 @@ import java.util.regex.Pattern;
 
 /**
  * Calculator
+ * Class to calculations.
  *
  * @author Vladimir Zhdanov (mailto:constHomeSpb@gmail.com)
  * @since 0.1
  */
 public class Calculator {
-    private Double result;
-    //private final Pattern pattern = Pattern.compile("(-?\\d+\\.?\\d*)?\\s*(\\S)\\s*(-?\\d+\\.?\\d*)", Pattern.CASE_INSENSITIVE);
+    private double result;
     private final Pattern pattern = Pattern.compile("(-?\\d+\\.?\\d*)?/(-?\\d+\\.?\\d*)", Pattern.CASE_INSENSITIVE);
-    private Actions actions;
-    private Map<String, BiConsumer> operations;
-
-    public Double getResult() {
+    private Operations operations;
+    private Map<String, BiConsumer> actions;
+    /**
+     * Get result.
+     *
+     * @return - return the result(double)
+     */
+    public double getResult() {
         return result;
     }
 
-    private void loudOperations() {
-        operations.put("/", div());
+    /**
+     * Set the result.
+     *
+     * @param result - double
+     */
+    public void setResult(double result) {
+        this.result = result;
     }
 
+    /**
+     * Loud operation to the HashMap.
+     */
+    private void loudOperations() {
+        actions.put("/", div());
+    }
+
+    /**
+     * Method to do division.
+     * @return - method to do division
+     */
     private BiConsumer<Double, Double> div() {
-        return actions::division;
+        return operations::division;
     }
 
     /**
      * Constructor of the class.
      */
     public Calculator() {
-        actions = new Actions();
-        operations = new HashMap<>();
+        operations = new Operations();
+        actions = new HashMap<>();
         loudOperations();
     }
 
+    /**
+     * For executing calculations.
+     * @param input - input string
+     * @return - check if the input value passed the validation method.
+     */
     public boolean calculate(String input) {
         boolean checker = checkInput(input);
         if (checker) {
@@ -56,24 +81,31 @@ public class Calculator {
                 double firstValue = Double.parseDouble(getValue);
                 getValue = input.substring(indexEnd).trim();
                 double secondValue = Double.parseDouble(getValue);
-                operations.get(operator).accept(firstValue, secondValue);
-                result = actions.getResult();
-                //System.out.println(firstValue + operator + secondValue + " = " + result);
+                actions.get(operator).accept(firstValue, secondValue);
+                result = operations.getResult();
             }
-            if (indexStart == 0 && result != null) {
+            if (indexStart == 0) {
                 var getValue = input.substring(indexEnd).trim();
                 double value = Double.parseDouble(getValue);
-                Double temp = result;
-                operations.get(operator).accept(result, value);
-                result = actions.getResult();
-                //System.out.println(temp + operator + value + " = " + result);
+                actions.get(operator).accept(result, value);
+                result = operations.getResult();
             }
         }
         return checker;
     }
 
+    /**
+     * Validation method.
+     *
+     * @param input - input value from an user(String)
+     * @return - check if the input value passed the validation method.
+     */
     private boolean checkInput(String input) {
-        Matcher matcher = pattern.matcher(input);
-        return matcher.find();
+        boolean result = false;
+        if (input != null) {
+            Matcher matcher = pattern.matcher(input);
+            result = matcher.find();
+        }
+        return result;
     }
 }
