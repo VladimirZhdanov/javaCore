@@ -6,6 +6,8 @@ import java.util.function.BiConsumer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static java.lang.Double.parseDouble;
+
 /**
  * Calculator
  * Class to calculations.
@@ -15,7 +17,7 @@ import java.util.regex.Pattern;
  */
 public class Calculator {
     private double result;
-    private final Pattern pattern = Pattern.compile("(-?\\d+\\.?\\d*)?/(-?\\d+\\.?\\d*)", Pattern.CASE_INSENSITIVE);
+    private final Pattern pattern = Pattern.compile("\\d*+[+\\/\\*-]+\\d+", Pattern.CASE_INSENSITIVE);
     private Operations operations;
     private Map<String, BiConsumer> actions;
     /**
@@ -40,6 +42,9 @@ public class Calculator {
      * Loud operation to the HashMap.
      */
     private void loudOperations() {
+        actions.put("+", add());
+        actions.put("-", subtract());
+        actions.put("*", multiply());
         actions.put("/", div());
     }
 
@@ -49,6 +54,30 @@ public class Calculator {
      */
     private BiConsumer<Double, Double> div() {
         return operations::division;
+    }
+
+    /**
+     * Method to do multiplication.
+     * @return - method to do multiplication
+     */
+    private BiConsumer<Double, Double> multiply() {
+        return operations::multiply;
+    }
+
+    /**
+     * Method to add number to number.
+     * @return - method to add number to number
+     */
+    private BiConsumer<Double, Double> add() {
+        return operations::add;
+    }
+
+    /**
+     * Method to subtract number from number.
+     * @return - method to subtract number from number
+     */
+    private BiConsumer<Double, Double> subtract() {
+        return operations::subtract;
     }
 
     /**
@@ -66,11 +95,11 @@ public class Calculator {
      * @return - check if the input value passed the validation method.
      */
     public boolean calculate(String input) {
-        boolean checker = checkInput(input);
-        if (checker) {
-            Pattern operationPattern = Pattern.compile("/");
+        boolean checker = false;
+        if (checkInput(input)) {
+            Pattern operationPattern = Pattern.compile("[\\+\\/\\*\\-]");
             Matcher matcher = operationPattern.matcher(input);
-            matcher.find();
+            checker = matcher.find();
 
             int indexStart = matcher.start();
             int indexEnd = matcher.end();
@@ -78,17 +107,18 @@ public class Calculator {
 
             if (indexStart != 0) {
                 var getValue = input.substring(0, indexStart).trim();
-                double firstValue = Double.parseDouble(getValue);
+                double firstValue = parseDouble(getValue);
                 getValue = input.substring(indexEnd).trim();
-                double secondValue = Double.parseDouble(getValue);
+                double secondValue = parseDouble(getValue);
                 actions.get(operator).accept(firstValue, secondValue);
                 result = operations.getResult();
-            }
-            if (indexStart == 0) {
-                var getValue = input.substring(indexEnd).trim();
-                double value = Double.parseDouble(getValue);
-                actions.get(operator).accept(result, value);
-                result = operations.getResult();
+            } else {
+                if (indexStart == 0) {
+                    var getValue = input.substring(indexEnd).trim();
+                    double value = parseDouble(getValue);
+                    actions.get(operator).accept(result, value);
+                    result = operations.getResult();
+                }
             }
         }
         return checker;

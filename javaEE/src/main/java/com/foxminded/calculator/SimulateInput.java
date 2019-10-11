@@ -10,7 +10,14 @@ import java.util.List;
  * @since 0.1
  */
 public class SimulateInput implements Input {
+    /**
+     * list of input from an "user".
+     */
     private final List<String> listOfSimulateInput;
+
+    /**
+     * A counter of input.
+     */
     private int count = 0;
 
     /**

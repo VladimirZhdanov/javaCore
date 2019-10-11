@@ -20,9 +20,35 @@ public class Operations {
     public void division(double first, double second) {
         if (second == 0) {
             throw new IllegalArgumentException("Can't divide on the zero");
-        } else {
-            result = first / second;
         }
+        result = first / second;
+    }
+
+    /**
+     * Multiply numbers.
+     * @param fist - 1st value - double
+     * @param second - Second value - double
+     */
+    public void multiply(double fist, double second) {
+        this.result = fist * second;
+    }
+
+    /**
+     * To sum numbers.
+     * @param fist - 1st value - double
+     * @param second - Second value - double
+     */
+    public void add(double fist, double second) {
+        this.result = fist + second;
+    }
+
+    /**
+     * Subtract numbers.
+     * @param fist - 1st value - double
+     * @param second - Second value - double
+     */
+    public void subtract(double fist, double second) {
+        this.result = fist - second;
     }
 
     /**

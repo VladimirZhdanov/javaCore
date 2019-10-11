@@ -25,20 +25,22 @@ class CalculatorTest {
     @Test
     void shouldReturnResultOfCalculationWhenGiveCorrectInput() {
         calculator.calculate("2/4");
-        double expected = 0.5;
+        calculator.calculate("-4");
+        calculator.calculate("+5");
+        double expected = 1.5;
         double actual = calculator.getResult();
         assertEquals(expected, actual,
-                "Should return result of the calculation 2/4 = 0.5...");
+                "Should return result of the calculation 2/4 = 0.5-4+5 = 1.5...");
     }
 
     @Test
     void shouldReturnResultOfCalculationWhenGiveCorrectInput2() {
         calculator.calculate("2/4");
-        calculator.calculate("/10");
-        double expected = 0.05;
+        calculator.calculate("*10");
+        double expected = 5.0;
         double actual = calculator.getResult();
         assertEquals(expected, actual,
-                "Should return result of the calculation 2/4 = 0.5/10 = 0.05...");
+                "Should return result of the calculation 2/4 = 0.5*10 = 5.0...");
     }
 
     @Test
@@ -55,5 +57,12 @@ class CalculatorTest {
         boolean actual = calculator.calculate(null);
         assertEquals(expected, actual,
                 "Should return false for null input...");
+    }
+
+    @Test
+    public void shouldThrowIllegalArgumentExceptionWhenGiveZero() {
+        Exception exception = assertThrows(IllegalArgumentException.class, () ->
+                calculator.calculate("1/0"));
+        assertEquals("Can't divide on the zero", exception.getMessage());
     }
 }

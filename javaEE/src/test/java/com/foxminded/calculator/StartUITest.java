@@ -33,9 +33,9 @@ class StartUITest {
 
     @Test
     public void shouldReturnResultOfCalculationsWhenUserDoesCalculations() {
-        Input input = new SimulateInput(Arrays.asList("1/2", "/2", "/10", "exit"));
+        Input input = new SimulateInput(Arrays.asList("1/2", "-2", "*10", "+3", "exit"));
         new StartUI(input, calculator, output).run();
-        double expected = 0.025;
+        double expected = -12;
         double actual = calculator.getResult();
         assertEquals(expected, actual,
                 "Should return result of calculations when User Does calculations...");
