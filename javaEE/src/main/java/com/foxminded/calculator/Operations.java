@@ -1,7 +1,6 @@
 package com.foxminded.calculator;
 
 /**
- * Operations
  * Operations for calculator application.
  *
  * @author Vladimir Zhdanov (mailto:constHomeSpb@gmail.com)

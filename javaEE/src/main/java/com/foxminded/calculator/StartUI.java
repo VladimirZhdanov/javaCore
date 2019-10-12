@@ -3,7 +3,6 @@ package com.foxminded.calculator;
 import java.util.function.Consumer;
 
 /**
- * StartUI
  * UI class of the calculator.
  *
  * @author Vladimir Zhdanov (mailto:constHomeSpb@gmail.com)

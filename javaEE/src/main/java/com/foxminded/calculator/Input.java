@@ -1,7 +1,6 @@
 package com.foxminded.calculator;
 
 /**
- * Input
  * Interface for input for the calculator application.
  *
  * @author Vladimir Zhdanov (mailto:constHomeSpb@gmail.com)

@@ -3,7 +3,6 @@ package com.foxminded.calculator;
 import java.util.List;
 
 /**
- * SimulateInput
  * Class needs for imitating input from an user.
  *
  * @author Vladimir Zhdanov (mailto:constHomeSpb@gmail.com)

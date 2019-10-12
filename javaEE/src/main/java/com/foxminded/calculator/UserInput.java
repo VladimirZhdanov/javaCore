@@ -3,7 +3,7 @@ package com.foxminded.calculator;
 import java.util.Scanner;
 
 /**
- * UserInput
+ * User Input
  *
  * @author Vladimir Zhdanov (mailto:constHomeSpb@gmail.com)
  * @since 0.1

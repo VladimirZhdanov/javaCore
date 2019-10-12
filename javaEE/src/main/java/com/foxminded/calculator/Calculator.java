@@ -9,8 +9,7 @@ import java.util.regex.Pattern;
 import static java.lang.Double.parseDouble;
 
 /**
- * Calculator
- * Class to calculations.
+ * Class for calculations.
  *
  * @author Vladimir Zhdanov (mailto:constHomeSpb@gmail.com)
  * @since 0.1
