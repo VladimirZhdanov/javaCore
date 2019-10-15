@@ -2,6 +2,7 @@ package com.foxminded.division;
 
 import static java.lang.Integer.parseInt;
 import static java.lang.Math.abs;
+import static java.lang.String.format;
 import static java.lang.String.valueOf;
 
 /**
@@ -70,6 +71,9 @@ public class Division {
         int multiplyResult;
         int divisorDigit = calculateDigit(divisor);
         int rest;
+        int tab;
+        String lastReminder;
+        String multiply;
 
         for (int i = 0; i < digits.length; i++) {
             reminder.append(digits[i]);
@@ -79,13 +83,13 @@ public class Division {
                 rest = reminderNumber % divisor;
                 multiplyResult = reminderNumber / divisor * divisor;
 
-                String lastReminder = String.format("%" + (i + 2) + "s", "_" + reminderNumber);
+                lastReminder = format("%" + (i + 2) + "s", "_" + reminderNumber);
                 drawnResult.append(lastReminder).append(lineSeparator);
 
-                String multiply = String.format("%" + (i + 2) + "d", multiplyResult);
+                multiply = format("%" + (i + 2) + "d", multiplyResult);
                 drawnResult.append(multiply).append(lineSeparator);
 
-                int tab = lastReminder.length() - calculateDigit(multiplyResult);
+                tab = lastReminder.length() - calculateDigit(multiplyResult);
                 drawnResult.append(makeDivider(multiplyResult, tab)).append(lineSeparator);
 
                 quotient.append(reminderNumber / divisor);
@@ -99,13 +103,20 @@ public class Division {
             }
 
             if (i == digits.length - 1) {
-                drawnResult.append(String.format("%" + (i + 2) + "s", reminderNumber)).append(lineSeparator);
+                drawnResult.append(format("%" + (i + 2) + "s", reminderNumber)).append(lineSeparator);
             }
         }
         modifyResultToView(dividend, divisor);
         return drawnResult.toString();
     }
 
+    /**
+     * Draws line for subtracting to make new local divider.
+     *
+     * @param reminderNumber - int
+     * @param tab - amount tabs - int
+     * @return - line for subtracting
+     */
     private String makeDivider(int reminderNumber, int tab) {
         return assemblyString(tab, ' ') + assemblyString(calculateDigit(reminderNumber), '-');
     }
