@@ -5,6 +5,6 @@ Task 2 - Unit tests
 
 Task 3 - Maven and other useful tools
 
-Task 4 - Integer divisionЗадание
+Task 4 - Integer division
 
 Task Extra - console culculator
